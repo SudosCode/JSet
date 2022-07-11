@@ -1,5 +1,5 @@
 # JSet
-A JavaScript port of the card game "Set"
+A JavaScript port of the card game "Set"\
 Play It!: https://sudoscode.github.io/JSet/
 
 Currently consists of a barebones HTML frontend, with all game logic being performed in the JS file.\
