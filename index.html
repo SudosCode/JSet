@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JSet</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas {
+      background: #eee;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAQABADASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAwb/xAAiEAACAQMEAwEBAAAAAAAAAAABAgMEBREABhIxE0FRFDL/xAAVAQEBAAAAAAAAAAAAAAAAAAADBf/EAB0RAQACAgIDAAAAAAAAAAAAAAECAwAhBBESkaH/2gAMAwEAAhEDEQA/ALy5XiCbeElFSU+IJ5/G86BnlPGMuQOyx4KzY+sNFu6GGI7hl8VSBSxxVcQNO2I2bDKGx/I4xYJ6ycd6O026CO026vepaO9G5zNG6IJGLO3jJKnpQEOW7AOqXcNvrrlA9r/HRo9xkFPVzREqzsuCzAZIwEHv2R80tk/GYGS+PSWVMpm3fsej7n//2Q==">
+</head>
+
+<body>
+  JSet: An opensource JS port of the card game "Set" by Sudonim
+  <script src="SetLogic.js"></script>
+</body>
+<div>
+  <span><button onclick=gameStart()>New Game</button></span>
+  <span>Game Log:</span>
+  <span id="logText"> Ready!</span>
+</div>
+<div>
+  <span>Sets: </span>
+  <span id="scoreNum">0</span>
+</div>
+<table>
+  <tr>
+    <td><canvas id="slot0" onclick=cardPick(0) width="360" height="180" title="Empty Slot">This text is visible if your
+        browser doesn't support Canvas. Your browser must be pretty ancient, huh?</canvas></td>
+    <td><canvas id="slot1" onclick=cardPick(1) width="360" height="180"
+        title="Empty Slot">ウェブブラウザが「Canvas」をサポートしていませんとこのテキストが表示します。　ウェブブラウザがかなり古いだよね。</canvas></td>
+    <td><canvas id="slot2" onclick=cardPick(2) width="360" height="180" title="Empty Slot"></canvas></td>
+  </tr>
+  <tr>
+    <td><canvas id="slot3" onclick=cardPick(3) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot4" onclick=cardPick(4) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot5" onclick=cardPick(5) width="360" height="180" title="Empty Slot"></canvas></td>
+  </tr>
+  <tr>
+    <td><canvas id="slot6" onclick=cardPick(6) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot7" onclick=cardPick(7) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot8" onclick=cardPick(8) width="360" height="180" title="Empty Slot"></canvas></td>
+  </tr>
+  <tr>
+    <td><canvas id="slot9" onclick=cardPick(9) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot10" onclick=cardPick(10) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot11" onclick=cardPick(11) width="360" height="180" title="Empty Slot"></canvas></td>
+  </tr>
+  <tr>
+    <td><canvas id="slot12" onclick=cardPick(12) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot13" onclick=cardPick(13) width="360" height="180" title="Empty Slot"></canvas></td>
+    <td><canvas id="slot14" onclick=cardPick(14) width="360" height="180" title="Empty Slot"></canvas></td>
+  </tr>
+</table>
+
+</html>
