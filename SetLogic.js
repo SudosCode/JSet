@@ -403,11 +403,16 @@ function cardPick(pos) { //function that's run when a card slot is clicked
   else {
     if (setCards[1] == undefined) { //check if the working array has room
       logpls("Selected " + slot.title + "...")
+      slot.style = "background-color: #ccc;" //change the card bg color to show it's selected
       setSlots[setSlots.length] = slot.id.slice(4)
       setCards[setCards.length] = slot.title //add selected card to the working array
     }
     else { //this happens when a set of three different cards have been selected
       logpls("Selected " + slot.title + "...Checking set...")
+      
+      document.getElementById("slot" + setSlots[0]).style = "" //set the bg colors of the cards back to #eee
+      document.getElementById("slot" + setSlots[1]).style = ""
+      
       setCards[setCards.length] = slot.title //add selected card to the working array 
       setSlots[setSlots.length] = slot.id.slice(4)
       console.log(setCards[0] + "," + setCards[1] + "," + setCards[2])
