@@ -8,6 +8,7 @@ Click the Canvases to pick cards, logic will check if you selected a set.\
 If no sets are present in the current 12 cards, 3 more will be drawn.
 
 # To Be Added
-Reordering cards after a set is picked from 15 cards (like a normal person would)\
+~~Reordering cards after a set is picked from 15 cards (like a normal person would)~~ **Added**\
+Align the Shapes on the cards to the center\
 Actual Multiplayer Mode\
 A Better Looking Frontend
