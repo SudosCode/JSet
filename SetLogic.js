@@ -94,6 +94,7 @@ function cardDraw(ind, pos) { //draw card function
   let number = (ind % 3) + 1 //assign number (1, 2 or 3)
   let color = ""
   let shading = ""
+  
   //terrible code which assigns cards to index numbers, should be redone
   if (ind <= 26) { //make first third of cards red
     color = "red"
@@ -213,9 +214,11 @@ function cardDraw(ind, pos) { //draw card function
     }
   }
   //set slot title for hover over text
+  slot.dataset.cardId = ind //tie the card number to the canvas element so it can be redrawn
   if (number == 1) { slot.setAttribute("title", number + " " + shading + " " + color + " " + shape) }
   else { slot.setAttribute("title", number + " " + shading + " " + color + " " + shape + "s") }
   //actual card drawing routine
+  if (pos > 11){ toggleSpares() } //show the spare set if a card needs to go there
   let ctx = slot.getContext("2d")
   ctx.beginPath()
   ctx.clearRect(0, 0, slot.width, slot.height)
@@ -299,6 +302,7 @@ function clearSlot(pos) {
   ctx.beginPath()
   ctx.clearRect(0, 0, slot.width, slot.height)
   ctx.closePath()
+  slot.dataset.cardId = ""
   slot.title = "Empty Slot"
 }
 
@@ -353,7 +357,6 @@ function capCheck() { //check if the given deck of 12 is a cap set
   }
 }
 
-
 function gameStart() { //init game 
   logpls("Initializing...")
   for (let step = 0; step < 81; step++) { //fill array
@@ -362,6 +365,7 @@ function gameStart() { //init game
   for (step = 0; step < 3; step++) {
     clearSlot(step + 12)
   }
+  toggleSpares()
   setCards = []
   setSlots = []
   let scoreNum = document.getElementById("scoreNum")
@@ -378,17 +382,17 @@ function gameStart() { //init game
 function topUp(){ //draws three extra cards
   let a = []
   for (step = 0; step < 15; step++){ //find the three empty slots
-	if (document.getElementById("slot" + step).title == "Empty Slot"){
-	  a.splice(1, 0, step) //put them in an array
-	}
+	  if (document.getElementById("slot" + step).title == "Empty Slot"){
+	    a.splice(1, 0, step) //put them in an array
+	  }
   }
   console.log(a)
   
   if (a[2] != undefined){ //proceed only if there are three open slots
     for (step = 0; step < 3; step++){
       cardDraw(deck[deck.length - 1], a[step]) //draw a card into one of the empty slots
-	  deck.pop() //pop the card
-	}
+	    deck.pop() //pop the card
+	  }
   }
 }
 
@@ -446,6 +450,8 @@ function cardPick(pos) { //function that's run when a card slot is clicked
           for (step = 0;step < 3; step++){ //if there are more than twelve cards out then remove the set
             clearSlot(setSlots[step])
           }
+          sortCards()
+          toggleSpares()
         }
           let scoreNum = document.getElementById("scoreNum")
           scoreNum.innerHTML = (~~scoreNum.innerHTML) + 1
@@ -475,5 +481,41 @@ function cardPick(pos) { //function that's run when a card slot is clicked
         setSlots.pop()
       }
     }
+  }
+}
+
+function sortCards() { //reorders the cards so that all empty slots are at the bottom
+  logpls("Reordering Cards...")
+  let a = []
+  for (step = 14; step >= 0; step--){ //create an array of all of the current card ids in order (skipping empties)
+	  if (document.getElementById("slot" + step).title != "Empty Slot"){
+	    a.splice(0, 0, document.getElementById("slot" + step).dataset.cardId) //fill the array with the actual card id of all the cards
+      clearSlot(step) //clear the slots to ensure there are no duplicates
+	  }
+  }
+  for (step = 0; step < a.length; step++){ //go through the array and redraw the cards to the slots in order
+    cardDraw(a[step], step)
+  }
+  logpls("Reordered Cards!")
+}
+
+function toggleSpares(){ //toggles the visibility of the lower three canvases
+  let a = 0
+  for (step = 12; step < 15; step++){ //check if the lowest slots are empty
+    if (document.getElementById("slot" + step).title == "Empty Slot"){
+      a++ //a will be 3 if all slots are empty
+    }
+  }
+
+  if (a == 3 && document.getElementById("slot12").height > 0){ //hide the spares after also checking if they're not already hidden
+    logpls("Hiding spare slots...")
+    document.getElementById("slot12").height = 0
+    document.getElementById("slot13").width = 0
+    document.getElementById("slot14").height = 0
+  } else if (a < 3 && document.getElementById("slot12").height == 0) { //show the spare slots after checking whether they're not visible and need to be
+    logpls("Showing spare slots...")
+    document.getElementById("slot12").height = 180
+    document.getElementById("slot13").width = 360
+    document.getElementById("slot14").height = 180
   }
 }
