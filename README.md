@@ -9,6 +9,7 @@ If no sets are present in the current 12 cards, 3 more will be drawn.
 
 # To Be Added
 ~~Reordering cards after a set is picked from 15 cards (like a normal person would)~~ **Added**\
-Align the Shapes on the cards to the center\
+~~Align the Shapes on the cards to the center~~ **Added**\
+More accurate shading (Rather than just using outlines with variable boldness)\
 Actual Multiplayer Mode\
 A Better Looking Frontend

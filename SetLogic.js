@@ -223,11 +223,12 @@ function cardDraw(ind, pos) { //draw card function
   ctx.beginPath()
   ctx.clearRect(0, 0, slot.width, slot.height)
   if (shape == "circle") { //draws circle(s)
+	let offset = (3 - number) * 80 //creates an offset for the first shape to center the shaes to the middle of the card
     ctx.save()
     ctx.scale(0.65, 1)
     for (let step = 0; step < number; step++) { //number parser
       ctx.beginPath()
-      ctx.arc(112 + (step * 160), slot.height / 2, 60, 0, Math.PI * 2) //draws filled shape
+      ctx.arc(offset + 112 + (step * 160), slot.height / 2, 60, 0, Math.PI * 2) //draws filled shape
       if (shading == "empty") {//empty fill (border)
         ctx.lineWidth = 9
         ctx.strokeStyle = color //color parser
@@ -250,7 +251,8 @@ function cardDraw(ind, pos) { //draw card function
   }
   if (shape == "diamond") { //draws diamond(s)
     for (let step = 0; step < number; step++) {
-      drawDiamond(ctx, 72 + (step * 102), 20, 78, 135)
+	  let offset = (3 - number) * 51 //creates an offset for the first shape to center the shaes to the middle of the card
+      drawDiamond(ctx, offset + 75 + (step * 102), 20, 78, 135)
       if (shading == "empty") {
         ctx.lineWidth = 5
         ctx.strokeStyle = color
@@ -270,9 +272,10 @@ function cardDraw(ind, pos) { //draw card function
       }
     }
   }
-  if (shape == "wave") {
+  if (shape == "wave") { //the centering for these looks kinda wonky, pls fix
     for (let step = 0; step < number; step++) {
-      drawWave(ctx, 72 + (step * 108), 20, 78, 135, 0)
+	  let offset = (3 - number) * 54 //creates an offset for the first shape to center the shaes to the middle of the card
+      drawWave(ctx, offset + 72 + (step * 108), 20, 78, 135, 0)
       if (shading == "empty") {
         ctx.lineWidth = 5
         ctx.strokeStyle = color
